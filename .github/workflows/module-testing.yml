@@ -1,0 +1,63 @@
+name: module-testing
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'modules/*.nf'
+      - 'tests/*.nf'
+
+  workflow_dispatch:
+
+jobs:
+
+  install_software:
+  
+    runs-on: ubuntu-20.04
+    
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          name: annacprice/ansible.nextflow-container
+          
+      - name: Run playbook
+        uses: dawidd6/action-ansible-playbook@v2
+        with:
+          playbook: playbook.yml
+          options: |
+            --verbose 
+  
+  module_matrix:
+
+    runs-on: ubuntu-20.04
+    outputs:
+      matrix: ${{ steps.set_matrix.outputs.GIT-COMMITS }}
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Get module names from commits
+        id: set_matrix
+        run: |
+          echo -n ::set-output name=GIT-COMMITS::
+          COMMITS=$(git diff --name-only ${{ github.event.before }}..${{ github.event.after }} modules/*.nf tests/*.nf | awk '{print $NF}' FS=/ | jq -R '[.]' | jq -s -c 'add' | jq 'unique')
+          echo "${COMMITS}"
+          
+  build:
+
+    needs: module_matrix
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        module: ${{ fromJson(needs.module_matrix.outputs.matrix) }}
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v3
+          
+      - name: Run test
+        run: |
+          nextflow run tests/${{ matrix.module }}
+          
