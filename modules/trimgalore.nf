@@ -11,7 +11,7 @@ process trimgalore {
 
     publishDir "${params.outputDir}/${task.process.replaceAll(":", "_")}/trimmed_reads", pattern: "*_val_{1,2}.fq.gz", mode: 'copy'
     publishDir "${params.outputDir}/${task.process.replaceAll(":", "_")}/fastqc", pattern: '*_fastqc.{zip,html}', mode: 'copy'
-    publishDir "${params.outputDir}/${task.process.replaceAll(":", "_")}/trim_report", pattern: '*_trimming_report.txt', mode: 'copy'
+    publishDir "${params.outputDir}/${task.process.replaceAll(":", "_")}/report", pattern: '*_trimming_report.txt', mode: 'copy'
 
     input:
 
