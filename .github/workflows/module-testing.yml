@@ -48,17 +48,17 @@ jobs:
       - name: checkout modules
         uses: actions/checkout@v3
         with:
-          path: modules
+          path: main
 
       - name: Run playbook
         uses: dawidd6/action-ansible-playbook@v2
         with:
           playbook: playbook.yml
-          directory: /home/runner/work/ansible
+          directory: /home/runner/work/ansible/ansible.nextflow-container
           options: |
             --verbose
           
       - name: Run test
-        working-directory: /home/runner/work/modules
+        working-directory: /home/runner/work/main/modules
         run: |
           nextflow run tests/${{ matrix.module }}
