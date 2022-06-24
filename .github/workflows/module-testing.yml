@@ -42,12 +42,13 @@ jobs:
         id: set_matrix
         run: |
           echo -n ::set-output name=GIT-COMMITS::
-          COMMITS=$(git diff --name-only ${{ github.event.before }}..${{ github.event.after }} modules/*.nf tests/*.nf | awk '{print $NF}' FS=/ | jq -R '[.]' | jq -s -c 'add' | jq 'unique')
+          COMMITS=$(git diff --name-only ${{ github.event.before }}..${{ github.event.after }} modules/*.nf | awk '{print $NF}' FS=/ | jq -R '[.]' | jq -s -c 'add')
           echo "${COMMITS}"
           
   build:
 
-    needs: module_matrix
+    needs: [install_software, module_matrix]
+
     runs-on: ubuntu-20.04
     strategy:
       matrix:
