@@ -51,10 +51,10 @@ jobs:
           path: modules
 
       - name: Run playbook
-        working-directory: /home/runner/work/ansible
         uses: dawidd6/action-ansible-playbook@v2
         with:
           playbook: playbook.yml
+          directory: /home/runner/work/ansible
           options: |
             --verbose
           
