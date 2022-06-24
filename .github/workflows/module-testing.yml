@@ -5,28 +5,11 @@ on:
       - main
     paths:
       - 'modules/*.nf'
-      - 'tests/*.nf'
 
   workflow_dispatch:
 
 jobs:
 
-  install_software:
-  
-    runs-on: ubuntu-20.04
-    
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          repository: annacprice/ansible.nextflow-container
-          
-      - name: Run playbook
-        uses: dawidd6/action-ansible-playbook@v2
-        with:
-          playbook: playbook.yml
-          options: |
-            --verbose 
-  
   module_matrix:
 
     runs-on: ubuntu-20.04
@@ -44,10 +27,10 @@ jobs:
           echo -n ::set-output name=GIT-COMMITS::
           COMMITS=$(git diff --name-only ${{ github.event.before }}..${{ github.event.after }} modules/*.nf | awk '{print $NF}' FS=/ | jq -R '[.]' | jq -s -c 'add')
           echo "${COMMITS}"
-          
+
   build:
 
-    needs: [install_software, module_matrix]
+    needs: module_matrix
 
     runs-on: ubuntu-20.04
     strategy:
@@ -56,9 +39,26 @@ jobs:
       fail-fast: false
 
     steps:
-      - uses: actions/checkout@v3
+      - name: checkout playbook
+        uses: actions/checkout@v3
+        with:
+          repository: annacprice/ansible.nextflow-container
+          path: ansible
+
+      - name: checkout modules
+        uses: actions/checkout@v3
+        with:
+          path: modules
+
+      - name: Run playbook
+        working-directory: /home/runner/work/ansible
+        uses: dawidd6/action-ansible-playbook@v2
+        with:
+          playbook: playbook.yml
+          options: |
+            --verbose
           
       - name: Run test
+        working-directory: /home/runner/work/modules
         run: |
           nextflow run tests/${{ matrix.module }}
-          
