@@ -1,0 +1,42 @@
+name: test-pipeline
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'test-pipeline/*.nf'
+
+  workflow_dispatch:
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: checkout playbook
+        uses: actions/checkout@v3
+        with:
+          repository: annacprice/ansible.nextflow-container
+
+      - name: Run playbook
+        uses: dawidd6/action-ansible-playbook@v2
+        with:
+          playbook: playbook.yml
+          options: |
+            --verbose
+
+      - name: checkout modules
+        uses: actions/checkout@v3
+
+      - name: Run docker test
+        working-directory: ./test-pipeline
+        run: |
+          nextflow run main.nf -profile docker
+
+      - name: Run singularity test
+        working-directory: ./test-pipeline
+        run: |
+          nextflow run main.nf -profile singularity
+
