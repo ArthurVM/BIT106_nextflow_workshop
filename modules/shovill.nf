@@ -11,7 +11,7 @@ process shovill {
 
     container = "quay.io/climb-big-data/shovill:1.1.0"
 
-    publishDir "${params.output_dir}/${task.process.replaceAll(":", "_")}", mode: 'copy', pattern: '*.fasta'
+    publishDir "${params.outputDir}/${task.process.replaceAll(":", "_")}", mode: 'copy', pattern: '*.fasta'
 
     input:
 
