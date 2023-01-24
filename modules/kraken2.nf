@@ -12,7 +12,7 @@ process kraken2 {
 
     container = "quay.io/climb-big-data/kraken2:2.1.2"
 
-    publishDir "${params.output_dir}/${task.process.replaceAll(":", "_")}", mode: 'copy', pattern: '*.txt'
+    publishDir "${params.outputDir}/${task.process.replaceAll(":", "_")}", mode: 'copy', pattern: '*.txt'
 
     input:
 

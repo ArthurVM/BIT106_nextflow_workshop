@@ -21,6 +21,6 @@ workflow {
 
     krakendb()
 
-    kraken2(tbfastqs.out.tbfastqs_out, krakendb.out.krakendb_out.toList())
+    kraken2(tbfastqs.out.tbfastqs_out, krakendb.out.krakendb_out)
 
 }
