@@ -1,9 +1,9 @@
 process trimmomatic {
     /**
     * Trim adapters from reads (https://github.com/usadellab/Trimmomatic)
-    * @input tuple sample_id, path(forward), path(reverse)
-    * @output trim_paired tuple sample_id, path("*_fp.fq"), path("*_rp.fq")
-    * @output trim_unpaired tuple sample_id, path("*_fu.fq.gz"), path("*_ru.fq.gz")
+    * @input tuple dataset_id, path(forward), path(reverse)
+    * @output trim_paired tuple dataset_id, path("*_fp.fq"), path("*_rp.fq")
+    * @output trim_unpaired tuple dataset_id, path("*_fu.fq.gz"), path("*_ru.fq.gz")
     */
 
     tag { dataset_id }

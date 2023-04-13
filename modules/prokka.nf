@@ -1,6 +1,6 @@
 process prokka {
     /**
-    * Annotate bacterial, archaeal and viral genomes using prokka (https://github.com/tseemann/prokka)
+    * Annotate bacterial, archaeal and viral genomes (https://github.com/tseemann/prokka)
     * @input tuple dataset_id, path(fasta)
     * @output prokka_out path("${dataset_id}.fna") 
     */
