@@ -27,7 +27,7 @@ process trimmomatic {
     if [[ \$(zcat ${forward} | head -n4 | wc -l) -eq 0 ]]; then
       exit 0
     else
-      trimmomatic PE ${forward} ${reverse} -threads ${task.cpus} -phred33 ${dataset_id}_fp.fq ${dataset_id}_fu.fq.gz ${dataset_id}_rp.fq ${dataset_id}_ru.fq.gz
+      trimmomatic PE ${forward} ${reverse} -threads ${task.cpus} -phred33 ${dataset_id}_fp.fq ${dataset_id}_fu.fq.gz ${dataset_id}_rp.fq ${dataset_id}_ru.fq.gz SLIDINGWINDOW:4:20 MINLEN:36
     fi
     """
 }
