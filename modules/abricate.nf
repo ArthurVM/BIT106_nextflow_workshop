@@ -9,7 +9,7 @@ process abricate {
 
     container = "quay.io/climb-big-data/abricate:1.0.0"
 
-    publishDir "${params.output_dir}/${task.process.replaceAll(":", "_")}", mode: 'copy', pattern: '*.csv'
+    publishDir "${params.outputDir}/${task.process.replaceAll(":", "_")}", mode: 'copy', pattern: '*.csv'
 
     input:
 
@@ -22,6 +22,6 @@ process abricate {
     script:
 
       """
-      abricate --db resfinder --csv ${fasta} > resistance_genes.csv
+      abricate --db resfinder --csv ${fasta} > ${dataset_id}_resistance_genes.csv
       """
 }
