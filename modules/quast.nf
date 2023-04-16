@@ -1,11 +1,9 @@
 process quast {
     /**
     * Perform quality assessment of genome assemblies using quast (https://github.com/ablab/quast)
-    * @input tuple dataset_id, path(fasta)
+    * @input path(fasta)
     * @output prokka_out path("${dataset_id}.fna") 
     */
-
-    tag { dataset_id }
 
     cpus 2
 
@@ -15,7 +13,7 @@ process quast {
 
     input:
 
-      tuple val(dataset_id), path(fasta)      
+      path(fasta)      
 
     output:
 

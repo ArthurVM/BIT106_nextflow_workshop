@@ -20,6 +20,7 @@ process shovill {
     output:
 
       tuple val(dataset_id), path("${dataset_id}.fasta"), emit: shovill_out
+      path("${dataset_id}.fasta"), emit: shovill_quast
 
     script:
 

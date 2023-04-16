@@ -17,7 +17,7 @@ process abricate {
 
     output:
 
-      tuple val(dataset_id), path("resistance_genes.csv"), emit: abricate_out
+      tuple val(dataset_id), path("${dataset_id}_resistance_genes.csv"), emit: abricate_out
 
     script:
 
