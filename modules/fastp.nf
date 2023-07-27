@@ -8,6 +8,10 @@ process fastp {
 
     tag { dataset_id }
 
+    cpus 1
+
+    memory '4GB'
+
     container = "quay.io/climb-big-data/fastp:0.23.2"
 
     publishDir "${params.output_dir}/${task.process.replaceAll(":", "_")}", mode: 'copy', pattern: '*_fastp.json'

@@ -10,6 +10,8 @@ process kraken2 {
 
     cpus 2
 
+    memory '16GB'
+
     container = "quay.io/climb-big-data/kraken2:2.1.2"
 
     publishDir "${params.outputDir}/${task.process.replaceAll(":", "_")}", mode: 'copy', pattern: '*.txt'

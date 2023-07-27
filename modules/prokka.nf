@@ -9,6 +9,8 @@ process prokka {
 
     cpus 2
 
+    memory '8GB'
+
     container = "quay.io/climb-big-data/prokka:1.14.5"
 
     publishDir "${params.outputDir}/${task.process.replaceAll(":", "_")}", pattern: "${dataset_id}/${dataset_id}.*", mode: 'copy'

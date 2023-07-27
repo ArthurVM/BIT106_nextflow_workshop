@@ -9,6 +9,8 @@ process mykrobe {
 
     cpus 2
 
+    memory '8GB'
+
     container = "quay.io/climb-big-data/mykrobe:0.12.1"
 
     publishDir "${params.output_dir}/${task.process.replaceAll(":", "_")}", mode: 'copy', pattern: '*_mykrobe_report.json'

@@ -1,7 +1,6 @@
 process tbfastqs {
 
-    input:
-    val(accession_id)
+    executor 'local'
 
     output:
     tuple val(accession_id), path("*_1.fastq.gz"), path("*_2.fastq.gz"), emit: tbfastqs_out

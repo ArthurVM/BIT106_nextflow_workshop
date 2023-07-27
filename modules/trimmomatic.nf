@@ -10,6 +10,8 @@ process trimmomatic {
 
     cpus 2
 
+    memory '8GB'
+
     container = "quay.io/climb-big-data/trimmomatic:0.39"
 
     publishDir "${params.outputDir}/${dataset_id}/${task.process.replaceAll(":", "_")}", pattern: "*_{fp,rp}.fq", mode: 'copy'

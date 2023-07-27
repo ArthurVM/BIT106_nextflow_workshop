@@ -7,6 +7,10 @@ process abricate {
 
     tag { dataset_id }
 
+    cpus 1
+
+    memory '4GB'
+
     container = "quay.io/climb-big-data/abricate:1.0.0"
 
     publishDir "${params.outputDir}/${task.process.replaceAll(":", "_")}", mode: 'copy', pattern: '*.csv'

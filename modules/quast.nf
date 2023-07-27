@@ -7,6 +7,8 @@ process quast {
 
     cpus 2
 
+    memory '8GB'
+
     container = "quay.io/climb-big-data/quast:5.2.0"
 
     publishDir "${params.outputDir}/${task.process.replaceAll(":", "_")}", pattern: "transposed_report.tsv", mode: 'copy'

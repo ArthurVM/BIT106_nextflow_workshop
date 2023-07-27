@@ -7,6 +7,10 @@ process trimgalore {
 
     tag { dataset_id }
 
+    cpus 1
+
+    memory '4GB'
+
     container = "quay.io/climb-big-data/trimgalore:0.6.7"
 
     publishDir "${params.outputDir}/${task.process.replaceAll(":", "_")}/trimmed_reads", pattern: "*_val_{1,2}.fq.gz", mode: 'copy'

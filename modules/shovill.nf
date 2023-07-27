@@ -9,6 +9,8 @@ process shovill {
 
     cpus 2
 
+    memory '8GB'
+
     container = "quay.io/climb-big-data/shovill:1.1.0"
 
     publishDir "${params.outputDir}/${task.process.replaceAll(":", "_")}", mode: 'copy', pattern: '*.fasta'

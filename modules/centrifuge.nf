@@ -10,6 +10,8 @@ process centrifuge {
 
     cpus 2
 
+    memory '8GB'
+
     container = "quay.io/climb-big-data/centrifuge:1.0.4"
 
     publishDir "${params.outputDir}/${task.process.replaceAll(":", "_")}", mode: 'copy', pattern: '*.tab'
