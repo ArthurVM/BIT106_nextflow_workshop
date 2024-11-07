@@ -9,13 +9,11 @@ process quast {
 
     memory '8GB'
 
-    container = "quay.io/climb-big-data/quast:5.2.0"
-
-    publishDir "${params.outputDir}/${task.process.replaceAll(":", "_")}", pattern: "transposed_report.tsv", mode: 'copy'
+     publishDir "${baseDir}/${dataset_id}/", pattern: "transposed_report.tsv", mode: 'copy'
 
     input:
 
-      path(fasta)      
+      tuple val(dataset_id), path(fasta)     
 
     output:
 

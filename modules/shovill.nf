@@ -11,9 +11,7 @@ process shovill {
 
     memory '8GB'
 
-    container = "quay.io/climb-big-data/shovill:1.1.0"
-
-    publishDir "${params.outputDir}/${task.process.replaceAll(":", "_")}", mode: 'copy', pattern: '*.fasta'
+    publishDir "${baseDir}/${dataset_id}/", mode: 'copy', pattern: '*.fasta'
 
     input:
 
@@ -22,7 +20,6 @@ process shovill {
     output:
 
       tuple val(dataset_id), path("${dataset_id}.fasta"), emit: shovill_out
-      path("${dataset_id}.fasta"), emit: shovill_quast
 
     script:
 
