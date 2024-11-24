@@ -9,7 +9,7 @@ process afanc {
 
     cpus 2
 
-    memory '8GB'
+    memory '13GB'
 
     publishDir "${baseDir}/${dataset_id}/Afanc", mode: 'copy', pattern: '*.json'
 
