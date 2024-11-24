@@ -27,13 +27,10 @@ workflow {
     // 3. Assemble reads using Shovill
 
 
-    // 4. Determine species in the sample using Afanc
+    // 4. Perform AMR prediction using Abricate
 
 
-    // 5. Perform AMR prediction using Abricate
-
-
-    // 6. Get quality control statistics using QUAST
+    // 5. Get quality control statistics using QUAST
 
 
 }
